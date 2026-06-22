@@ -231,7 +231,7 @@ function initRSVP(confetti: Confetti) {
       }
 
       // 1. Вставьте сюда ссылку на ваш Google Apps Script (Web App URL)
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeRK0TgcyYgYDeSZiMVzeHHunUwrOicGQLu3iHGyBgYjtoBf9_EOd_XJOVx114U0oNWg/exec'; 
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmbgJP1l65UUp7MRH8TGLkUiytnyELInI5-hv4HkYO6iKhu8UxTeRH1yT0gGyNV00Z/exec'; 
 
       if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         // Если ссылка ещё не добавлена, просто показываем анимацию успеха (для теста)
