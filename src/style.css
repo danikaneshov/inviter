@@ -163,6 +163,82 @@ body {
 }
 
 /* ===========================
+   FULLSCREEN PHOTO HERO
+   =========================== */
+.fullscreen-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-left: calc(-50vw + 50%); /* break out of main content limits */
+}
+
+.torn-paper {
+  position: absolute;
+  bottom: -1px; /* overlap slightly to avoid lines */
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath fill='%23faf7f2' d='M0,40 L0,20 C10,30 15,10 25,20 C35,30 45,5 55,20 C65,35 75,10 85,25 C95,40 105,15 115,20 C125,25 135,10 145,20 C155,30 165,5 175,15 C185,25 195,10 200,20 L200,40 Z' /%3E%3C/svg%3E");
+  background-size: 200px 100%;
+  background-repeat: repeat-x;
+  z-index: 10;
+  filter: drop-shadow(0 -5px 12px rgba(0,0,0,0.15));
+}
+
+.fullscreen-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -2;
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) { .fullscreen-bg { background-attachment: scroll; } }
+@supports (-webkit-touch-callout: none) { .fullscreen-bg { background-attachment: scroll; } }
+
+.fullscreen-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: -1;
+}
+
+.fullscreen-content {
+  text-align: center;
+  z-index: 1;
+  padding: 0 20px;
+  margin-top: auto;
+  margin-bottom: 80px;
+}
+
+.hero-role {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3.5rem, 15vw, 5.5rem);
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* ===========================
    HERO SECTION
    =========================== */
 .hero {
@@ -537,11 +613,11 @@ body {
 }
 
 .couple-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 15px 40px var(--shadow);
-  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  border: none;
   transform-style: preserve-3d;
   perspective: 1000px;
   width: 100%;
@@ -551,8 +627,9 @@ body {
 
 .card-img {
   width: 100%;
-  height: 380px;
+  height: 450px;
   overflow: hidden;
+  border-radius: 0;
 }
 .card-img img {
   width: 100%;
