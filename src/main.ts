@@ -233,14 +233,6 @@ function initRSVP(confetti: Confetti) {
       // 1. Вставьте сюда ссылку на ваш Google Apps Script (Web App URL)
       const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmbgJP1l65UUp7MRH8TGLkUiytnyELInI5-hv4HkYO6iKhu8UxTeRH1yT0gGyNV00Z/exec'; 
 
-      if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-        // Если ссылка ещё не добавлена, просто показываем анимацию успеха (для теста)
-        step2.classList.add('hidden');
-        thanks.classList.remove('hidden');
-        confetti.burst();
-        return;
-      }
-
       // Показываем загрузку
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Жіберілуде...'; // Sending...
