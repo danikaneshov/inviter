@@ -1,6 +1,5 @@
 import './style.css';
-import * as THREE from 'three';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+
 
 // ===========================
 // CONFIG
