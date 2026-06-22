@@ -7,39 +7,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 // ===========================
 const WEDDING_DATE = new Date('2026-08-20T17:00:00+06:00');
 
-// ===========================
-// LANGUAGE
-// ===========================
-function applyLang(l: 'kk' | 'ru') {
-  document.querySelectorAll(`[data-${l}]`).forEach(el => {
-    const text = el.getAttribute(`data-${l}`);
-    if (text) el.textContent = text;
-  });
-}
 
-function initLanguageOverlay() {
-  const overlay = document.getElementById('lang-overlay')!;
-  const mainContent = document.getElementById('main-content')!;
-  
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const l = (btn as HTMLElement).dataset.lang as 'kk' | 'ru';
-      applyLang(l);
-      
-      // Hide overlay
-      overlay.classList.add('hidden');
-      
-      // Show main content
-      mainContent.classList.remove('hidden');
-      
-      // Trigger observers and resize for 3D canvas since it was display:none
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-        window.dispatchEvent(new Event('scroll'));
-      }, 50);
-    });
-  });
-}
 
 // ===========================
 // SCROLL ANIMATIONS
@@ -62,115 +30,7 @@ function initScrollObserver() {
   });
 }
 
-// ===========================
-// THREE.JS RINGS
-// ===========================
-class Rings3D {
-  private container: HTMLElement;
-  private scene: THREE.Scene;
-  private camera: THREE.PerspectiveCamera;
-  private renderer: THREE.WebGLRenderer;
-  private ringsGroup: THREE.Group;
-  private isVisible = false;
 
-  constructor() {
-    this.container = document.getElementById('three-container')!;
-    this.scene = new THREE.Scene();
-    
-    // Camera
-    const aspect = this.container.clientWidth / this.container.clientHeight;
-    this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
-    this.camera.position.z = 18;
-
-    // Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    this.renderer.setSize(this.container.clientWidth || 1, this.container.clientHeight || 1);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.container.appendChild(this.renderer.domElement);
-
-    // Ultra-realistic glossy reflections using RoomEnvironment
-    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-    this.scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
-
-    this.ringsGroup = new THREE.Group();
-    this.scene.add(this.ringsGroup);
-
-    this.createRings();
-    this.setupLighting();
-
-    // Intersection observer to only render when visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        this.isVisible = entry.isIntersecting;
-      });
-    }, { threshold: 0 });
-    observer.observe(this.container);
-
-    window.addEventListener('resize', () => this.resize());
-    this.animate();
-  }
-
-  private createRings() {
-    // High-poly geometry
-    const geometry = new THREE.TorusGeometry(3.2, 0.45, 64, 128);
-    
-    // Ultra glossy gold material
-    const materialGold = new THREE.MeshStandardMaterial({
-      color: 0xffd700,
-      metalness: 1.0,
-      roughness: 0.05, // very glossy
-    });
-
-    const ring1 = new THREE.Mesh(geometry, materialGold);
-    ring1.position.x = -1.4;
-    ring1.rotation.y = 0.5;
-    ring1.rotation.x = 0.5;
-
-    const ring2 = new THREE.Mesh(geometry, materialGold);
-    ring2.position.x = 1.4;
-    ring2.rotation.y = -0.5;
-    ring2.rotation.x = -0.5;
-
-    this.ringsGroup.add(ring1);
-    this.ringsGroup.add(ring2);
-  }
-
-  private setupLighting() {
-    // Ambient light provides a base illumination
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
-    this.scene.add(ambientLight);
-
-    // Main directional light for specular highlights
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.0);
-    dirLight1.position.set(5, 5, 5);
-    this.scene.add(dirLight1);
-
-    // Fill light
-    const dirLight2 = new THREE.DirectionalLight(0xffddaa, 1.5);
-    dirLight2.position.set(-5, -5, 5);
-    this.scene.add(dirLight2);
-  }
-
-  private resize() {
-    if (!this.container) return;
-    const width = this.container.clientWidth;
-    const height = this.container.clientHeight;
-    
-    this.camera.aspect = width / height;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(width, height);
-  }
-
-  private animate = () => {
-    requestAnimationFrame(this.animate);
-    
-    if (this.isVisible) {
-      this.ringsGroup.rotation.y += 0.005;
-      this.ringsGroup.rotation.x = Math.sin(Date.now() * 0.001) * 0.2;
-      this.renderer.render(this.scene, this.camera);
-    }
-  }
-}
 
 // ===========================
 // BACKGROUND PARTICLES
@@ -355,22 +215,8 @@ class Countdown {
 // RSVP LOGIC
 // ===========================
 function initRSVP(confetti: Confetti) {
-  const step1 = document.getElementById('rsvp-step1')!;
   const step2 = document.getElementById('rsvp-step2')!;
-  const declined = document.getElementById('rsvp-declined')!;
   const thanks = document.getElementById('rsvp-thanks')!;
-
-  document.getElementById('rsvp-yes')!.addEventListener('click', () => {
-    step1.classList.add('hidden');
-    step2.classList.remove('hidden');
-    // Trigger scroll event to ensure any inner elements animate if needed
-    window.dispatchEvent(new Event('scroll'));
-  });
-
-  document.getElementById('rsvp-no')!.addEventListener('click', () => {
-    step1.classList.add('hidden');
-    declined.classList.remove('hidden');
-  });
 
   const submitBtn = document.getElementById('rsvp-submit');
   if (submitBtn) {
@@ -416,116 +262,21 @@ function initInteractiveEffects() {
     });
   });
 
-  // Interactive Schedule Scroll
-  const scheduleSection = document.getElementById('schedule-section');
-  const progressBar = document.getElementById('schedule-progress');
-  const items = document.querySelectorAll('.schedule-item');
-  
-  if (scheduleSection && progressBar && items.length > 0) {
-    window.addEventListener('scroll', () => {
-      const rect = scheduleSection.getBoundingClientRect();
-      const viewHeight = window.innerHeight;
-      
-      // Calculate how far the section is scrolled
-      // Start when top hits center of screen
-      const start = viewHeight / 2;
-      const total = rect.height - viewHeight/2; 
-      const current = start - rect.top;
-      
-      let percentage = (current / total) * 100;
-      percentage = Math.max(0, Math.min(100, percentage));
-      
-      progressBar.style.height = `${percentage}%`;
-      
-      // Highlight active items
-      items.forEach(item => {
-        const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < viewHeight / 2 + 50) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
-        }
-      });
-    });
-  }
+
 }
 
-// ===========================
-// GUESTBOOK LOGIC (MOCK)
-// ===========================
-function initGuestbook() {
-  const fileInput = document.getElementById('gb-file') as HTMLInputElement;
-  const filePreview = document.getElementById('file-preview') as HTMLElement;
-  const submitBtn = document.getElementById('gb-submit') as HTMLElement;
-  
-  const formArea = document.getElementById('guestbook-form-area') as HTMLElement;
-  const loadingArea = document.getElementById('guestbook-loading') as HTMLElement;
-  const successArea = document.getElementById('guestbook-success') as HTMLElement;
 
-  if (fileInput && filePreview) {
-    fileInput.addEventListener('change', (e) => {
-      const target = e.target as HTMLInputElement;
-      const file = target.files?.[0];
-      
-      if (file) {
-        filePreview.innerHTML = ''; // clear
-        filePreview.classList.remove('hidden');
-        
-        const fileURL = URL.createObjectURL(file);
-        
-        if (file.type.startsWith('image/')) {
-          const img = document.createElement('img');
-          img.src = fileURL;
-          filePreview.appendChild(img);
-        } else if (file.type.startsWith('video/')) {
-          const video = document.createElement('video');
-          video.src = fileURL;
-          video.controls = true;
-          filePreview.appendChild(video);
-        }
-      } else {
-        filePreview.classList.add('hidden');
-        filePreview.innerHTML = '';
-      }
-    });
-  }
-
-  if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
-      // 1. Hide form, show loading
-      formArea.classList.add('hidden');
-      loadingArea.classList.remove('hidden');
-      
-      // MOCK UPLOAD TO FIREBASE
-      // In reality: 
-      // await firebase.storage().ref().put(file);
-      // await firebase.firestore().collection('wishes').add({name, text, fileUrl});
-
-      setTimeout(() => {
-        // 2. Hide loading, show success
-        loadingArea.classList.add('hidden');
-        successArea.classList.remove('hidden');
-        
-        const confetti = new Confetti();
-        confetti.burst();
-      }, 2500);
-    });
-  }
-}
 
 // ===========================
 // INIT
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
-  initLanguageOverlay();
   initScrollObserver();
   initInteractiveEffects();
-  initGuestbook();
   
   new Particles();
   const confetti = new Confetti();
   new Countdown();
-  new Rings3D();
   
   initRSVP(confetti);
 });

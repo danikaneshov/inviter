@@ -11,26 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- Language Overlay -->
-    <div id="lang-overlay" class="lang-overlay">
-      <div class="lang-card anim-el show">
-        <div class="lang-ornament-top"></div>
-        <div class="lang-body">
-          <div class="lang-envelope">💌</div>
-          <h2 class="lang-title">Тілді таңдаңыз</h2>
-          <p class="lang-sub">Выберите язык</p>
-          <div class="lang-btns">
-            <button class="lang-btn" data-lang="kk">
-              <span>🇰🇿</span> Қазақша
-            </button>
-            <button class="lang-btn" data-lang="ru">
-              <span>🇷🇺</span> Русский
-            </button>
-          </div>
-        </div>
-        <div class="lang-ornament-bottom"></div>
-      </div>
-    </div>
 
     <!-- Background Layers -->
     <div class="bg-pattern"></div>
@@ -38,13 +18,14 @@
     <canvas id="confetti-canvas"></canvas>
 
     <!-- Main Content -->
-    <div id="main-content" class="hidden">
+    <div id="main-content">
       <!-- HERO SECTION -->
       <section class="hero section">
         <div class="hero-content anim-on-scroll">
           <div class="hero-card">
             <div class="card-frame"></div>
-            <p class="hero-invite" data-kk="Құрметті қонақтар, сіздерді" data-ru="Уважаемые гости, приглашаем вас">Құрметті қонақтар, сіздерді</p>
+            <div class="hosts" style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--gold); margin-bottom: 20px; font-style: italic;">Той иелері: Арман, Гуляим</div>
+            <p class="hero-invite">Құрметті қонақтар, сіздерді</p>
             <div class="hero-names">
               <span class="name-one">Жансая</span>
             </div>
@@ -73,53 +54,29 @@
         </div>
       </section>
 
-      <!-- RINGS (3D) SECTION -->
-      <section class="rings-section section">
-        <div class="rings-content anim-on-scroll">
-          <p class="section-subtitle" data-kk="Мәңгілік махаббат белгісі" data-ru="Символ вечной любви">Мәңгілік махаббат белгісі</p>
-          <div id="three-container" class="three-container"></div>
-          <p class="rings-date">20 . 08 . 2026</p>
+      <!-- INVITATION TEXT SECTION -->
+      <section class="invitation-text-section section">
+        <div class="invitation-text-content anim-on-scroll" style="text-align: center; max-width: 800px; padding: 20px;">
+          <h3 style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--gold); margin-bottom: 20px;">Құрметті қонақтар!</h3>
+          <p style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--text); line-height: 1.8; font-style: italic;">
+            Сіздерді аяулы қызымыз Жансаяның ұзату тойына арналған салтанатты дастарханымыздың қадірлі қонағы болуға шақырамыз!
+          </p>
+          <div class="hero-line" style="margin-top: 30px; margin-bottom: 0;"></div>
         </div>
       </section>
 
       <!-- PARALLAX DIVIDER 1 -->
       <div class="parallax-divider" style="background-image: url('/assets/parallax1.png');"></div>
 
-      <!-- SCHEDULE (INTERACTIVE SCALE) SECTION -->
+      <!-- SCHEDULE SECTION -->
       <section class="schedule-section section" id="schedule-section">
-        <h2 class="section-title anim-on-scroll" data-kk="Той бағдарламасы" data-ru="Программа дня">Той бағдарламасы</h2>
-        <div class="schedule-container">
-          <div class="schedule-scale">
-            <div class="schedule-progress" id="schedule-progress"></div>
-          </div>
-          <div class="schedule-list">
-            <div class="schedule-item anim-on-scroll">
-              <div class="time">16:00</div>
-              <div class="sched-info">
-                <h4 data-kk="Қонақтардың жиналуы" data-ru="Сбор гостей">Қонақтардың жиналуы</h4>
-                <p data-kk="Фуршет және фотосессия" data-ru="Фуршет и фотосессия">Фуршет және фотосессия</p>
-              </div>
-            </div>
-            <div class="schedule-item anim-on-scroll">
-              <div class="time">17:00</div>
-              <div class="sched-info">
-                <h4 data-kk="Неке қию рәсімі" data-ru="Церемония бракосочетания">Неке қию рәсімі</h4>
-                <p data-kk="Махаббат антын беру" data-ru="Клятвы любви">Махаббат антын беру</p>
-              </div>
-            </div>
-            <div class="schedule-item anim-on-scroll">
-              <div class="time">18:00</div>
-              <div class="sched-info">
-                <h4 data-kk="Той бастар" data-ru="Начало банкета">Той бастар</h4>
-                <p data-kk="Мерекелік дастархан және шоу" data-ru="Праздничный ужин и шоу">Мерекелік дастархан және шоу</p>
-              </div>
-            </div>
-            <div class="schedule-item anim-on-scroll">
-              <div class="time">22:00</div>
-              <div class="sched-info">
-                <h4 data-kk="Тәтті торт" data-ru="Свадебный торт">Тәтті торт</h4>
-                <p data-kk="Тойдың тәтті сәті" data-ru="Сладкий момент вечера">Тойдың тәтті сәті</p>
-              </div>
+        <h2 class="section-title anim-on-scroll">Той бағдарламасы</h2>
+        <div class="schedule-container" style="justify-content: center;">
+          <div style="text-align: center;" class="anim-on-scroll">
+            <div style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--gold-dk); font-weight: 600; margin-bottom: 10px;">17:00</div>
+            <div>
+              <h4 style="font-size: 1.3rem; margin-bottom: 5px;">Қонақтардың жиналуы</h4>
+              <p style="color: var(--text-muted); font-size: 1.1rem;">Фуршет және фотосессия</p>
             </div>
           </div>
         </div>
@@ -141,10 +98,6 @@
             <p class="info-small" data-kk="Астана қ., Е-489 көшесі, 7-үй" data-ru="г. Астана, Улица Е-489, д. 7">Астана қ., Е-489 көшесі, 7-үй</p>
             <div class="map-container">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115160.01509177112!2d71.32049094056263!3d51.1396262483838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245812a32c2c019%3A0xeab5bb9a89669527!2sMereke%20Hall!5e0!3m2!1sru!2sus!4v1718900000000!5m2!1sru!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="dresscode">
-              <span class="dresscode-icon">👔</span>
-              <span data-kk="Дресс-код: Ресми стиль" data-ru="Дресс-код: Официальный стиль">Дресс-код: Ресми стиль</span>
             </div>
           </div>
         </div>
@@ -181,78 +134,27 @@
         </div>
       </section>
 
-      <!-- GUESTBOOK SECTION -->
-      <section class="guestbook-section section" id="guestbook-section">
-        <h2 class="section-title anim-on-scroll" data-kk="Тілектер кітабы" data-ru="Книга пожеланий">Тілектер кітабы</h2>
-        <p class="guestbook-subtitle anim-on-scroll" data-kk="Жылы лебіздеріңіз бен суреттеріңізді осында қалдырыңыз" data-ru="Оставьте ваши теплые пожелания и фото/видео здесь">Жылы лебіздеріңіз бен суреттеріңізді осында қалдырыңыз</p>
-        
-        <div class="guestbook-container anim-on-scroll">
-          <div id="guestbook-form-area" class="rsvp-form">
-            <div class="form-group">
-              <label class="rsvp-label" data-kk="Кімнен?" data-ru="От кого?">Кімнен?</label>
-              <input type="text" class="rsvp-input" id="gb-name" placeholder="...">
-            </div>
-            <div class="form-group">
-              <label class="rsvp-label" data-kk="Тілегіңіз" data-ru="Ваше пожелание">Тілегіңіз</label>
-              <textarea class="rsvp-input" id="gb-text" rows="4" placeholder="..."></textarea>
-            </div>
-            
-            <div class="file-upload-wrapper">
-              <input type="file" id="gb-file" accept="image/*,video/*" class="hidden">
-              <label for="gb-file" class="rsvp-btn file-upload-btn">
-                <span class="upload-icon">📷</span>
-                <span data-kk="Сурет немесе видео қосу" data-ru="Прикрепить фото/видео">Сурет немесе видео қосу</span>
-              </label>
-              <div id="file-preview" class="file-preview hidden"></div>
-            </div>
-
-            <button class="rsvp-btn rsvp-submit" id="gb-submit" data-kk="Жіберу" data-ru="Отправить">Жіберу</button>
-          </div>
-          
-          <div id="guestbook-loading" class="guestbook-status hidden">
-            <div class="spinner"></div>
-            <p data-kk="Жүктелуде..." data-ru="Отправка...">Жүктелуде...</p>
-          </div>
-          
-          <div id="guestbook-success" class="guestbook-status hidden">
-            <div class="success-icon">✨</div>
-            <h3 class="success-title" data-kk="Рақмет!" data-ru="Спасибо!">Рақмет!</h3>
-            <p data-kk="Сіздің тілегіңіз сақталды." data-ru="Ваше пожелание успешно сохранено.">Сіздің тілегіңіз сақталды.</p>
-          </div>
-        </div>
-      </section>
-
       <!-- RSVP SECTION -->
       <section class="rsvp-section section">
         <div class="rsvp-content anim-on-scroll">
-          <div id="rsvp-step1" class="rsvp-step">
-            <div class="rsvp-question" data-kk="Тойға қатысасыз ба?" data-ru="Вы придёте на торжество?">Тойға қатысасыз ба?</div>
-            <div class="rsvp-choices">
-              <button class="rsvp-btn rsvp-yes" id="rsvp-yes" data-kk="Иә, міндетті түрде! 🎉" data-ru="Да, обязательно! 🎉">Иә, міндетті түрде! 🎉</button>
-              <button class="rsvp-btn rsvp-no" id="rsvp-no" data-kk="Өкінішке орай, жоқ 😔" data-ru="К сожалению, нет 😔">Өкінішке орай, жоқ 😔</button>
-            </div>
-          </div>
-          <div id="rsvp-step2" class="rsvp-step hidden">
+          <div id="rsvp-step2" class="rsvp-step">
+            <h2 class="section-title anim-on-scroll" style="margin-bottom: 2rem;">Тойға тіркелу</h2>
             <div class="rsvp-form">
               <div class="form-group">
-                <label class="rsvp-label" data-kk="Сіздің есіміңіз?" data-ru="Ваше имя?">Сіздің есіміңіз?</label>
+                <label class="rsvp-label">Сіздің есіміңіз?</label>
                 <input type="text" class="rsvp-input" id="guest-name" placeholder="...">
               </div>
               <div class="form-group">
-                <label class="rsvp-label" data-kk="Сіз кіммен келесіз?" data-ru="С кем вы придете?">Сіз кіммен келесіз?</label>
+                <label class="rsvp-label">Сіз кіммен келесіз?</label>
                 <input type="text" class="rsvp-input" id="guest-companions" placeholder="...">
               </div>
-              <button class="rsvp-btn rsvp-submit" id="rsvp-submit" data-kk="Жіберу" data-ru="Отправить">Жіберу</button>
+              <button class="rsvp-btn rsvp-submit" id="rsvp-submit">Жіберу</button>
             </div>
-          </div>
-          <div id="rsvp-declined" class="rsvp-step hidden">
-            <div class="rsvp-emoji">😢</div>
-            <p class="rsvp-msg" data-kk="Өте өкінішті! Бірақ сізді түсінеміз." data-ru="Очень жаль! Но мы вас понимаем.">Өте өкінішті! Бірақ сізді түсінеміз.</p>
           </div>
           <div id="rsvp-thanks" class="rsvp-step hidden">
             <div class="thanks-emoji">✨</div>
-            <h2 class="thanks-title" data-kk="Рахмет!" data-ru="Спасибо!">Рахмет!</h2>
-            <p class="thanks-sub" data-kk="Жауабыңыз қабылданды!" data-ru="Ваш ответ принят!">Жауабыңыз қабылданды!</p>
+            <h2 class="thanks-title">Рахмет!</h2>
+            <p class="thanks-sub">Жауабыңыз қабылданды!</p>
           </div>
         </div>
       </section>
