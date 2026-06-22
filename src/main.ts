@@ -217,15 +217,57 @@ function initRSVP(confetti: Confetti) {
   const step2 = document.getElementById('rsvp-step2')!;
   const thanks = document.getElementById('rsvp-thanks')!;
 
-  const submitBtn = document.getElementById('rsvp-submit');
+  const submitBtn = document.getElementById('rsvp-submit') as HTMLButtonElement;
   if (submitBtn) {
     submitBtn.addEventListener('click', () => {
-      // In a real app, you would collect the values of #guest-name and #guest-companions here
-      // and send them to a server.
-      
-      step2.classList.add('hidden');
-      thanks.classList.remove('hidden');
-      confetti.burst();
+      const nameEl = document.getElementById('guest-name') as HTMLInputElement;
+      const companionsEl = document.getElementById('guest-companions') as HTMLInputElement;
+      const name = nameEl?.value.trim();
+      const companions = companionsEl?.value.trim() || 'Один / Одна';
+
+      if (!name) {
+        alert('Пожалуйста, введите ваше имя (Сіздің есіміңіз?)');
+        return;
+      }
+
+      // 1. Вставьте сюда ссылку на ваш Google Apps Script (Web App URL)
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeRK0TgcyYgYDeSZiMVzeHHunUwrOicGQLu3iHGyBgYjtoBf9_EOd_XJOVx114U0oNWg/exec'; 
+
+      if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        // Если ссылка ещё не добавлена, просто показываем анимацию успеха (для теста)
+        step2.classList.add('hidden');
+        thanks.classList.remove('hidden');
+        confetti.burst();
+        return;
+      }
+
+      // Показываем загрузку
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Жіберілуде...'; // Sending...
+      submitBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('companions', companions);
+      formData.append('date', new Date().toLocaleString('ru-RU'));
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData,
+      })
+      .then(() => {
+        // При no-cors ответ будет "непрозрачным" (opaque), поэтому мы просто предполагаем успешную отправку
+        step2.classList.add('hidden');
+        thanks.classList.remove('hidden');
+        confetti.burst();
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Қате пайда болды (Ошибка при отправке). Попробуйте еще раз.');
+        submitBtn.textContent = originalText || 'Жіберу';
+        submitBtn.disabled = false;
+      });
     });
   }
 }
