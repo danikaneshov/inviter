@@ -193,8 +193,8 @@ body {
 
 .hero-invite { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
 .hero-names { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
-.name-one, .name-two { font-family: var(--font-script); font-size: clamp(3rem, 12vw, 4.5rem); color: var(--text); line-height: 1; }
-.name-amp { font-family: var(--font-script); font-size: clamp(2rem, 8vw, 3rem); color: var(--gold); }
+.name-one, .name-two { font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: clamp(3rem, 12vw, 4.5rem); color: var(--text); line-height: 1; }
+.name-amp { font-family: var(--font-serif); font-style: italic; font-size: clamp(2rem, 8vw, 3rem); color: var(--gold); }
 
 .hero-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 20px; }
 .hero-event { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-muted); font-style: italic; letter-spacing: 1px; }
