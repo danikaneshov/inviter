@@ -246,15 +246,18 @@ function initRSVP(confetti: Confetti) {
       submitBtn.textContent = 'Жіберілуде...'; // Sending...
       submitBtn.disabled = true;
 
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('companions', companions);
-      formData.append('date', new Date().toLocaleString('ru-RU'));
+      const data = new URLSearchParams();
+      data.append('name', name);
+      data.append('companions', companions);
+      data.append('date', new Date().toLocaleString('ru-RU'));
 
       fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data.toString(),
       })
       .then(() => {
         // При no-cors ответ будет "непрозрачным" (opaque), поэтому мы просто предполагаем успешную отправку
