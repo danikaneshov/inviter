@@ -6,13 +6,11 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 // CONFIG
 // ===========================
 const WEDDING_DATE = new Date('2026-08-20T17:00:00+06:00');
-let lang: 'kk' | 'ru' = 'kk';
 
 // ===========================
 // LANGUAGE
 // ===========================
 function applyLang(l: 'kk' | 'ru') {
-  lang = l;
   document.querySelectorAll(`[data-${l}]`).forEach(el => {
     const text = el.getAttribute(`data-${l}`);
     if (text) el.textContent = text;
@@ -395,10 +393,11 @@ function initInteractiveEffects() {
   const tiltCards = document.querySelectorAll('.tilt-card');
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
+      const mouseEvent = e as MouseEvent;
       const el = card as HTMLElement;
       const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left; // x position within the element.
-      const y = e.clientY - rect.top;  // y position within the element.
+      const x = mouseEvent.clientX - rect.left; // x position within the element.
+      const y = mouseEvent.clientY - rect.top;  // y position within the element.
       
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
