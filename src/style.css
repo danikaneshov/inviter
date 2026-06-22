@@ -602,6 +602,18 @@ body {
   background: rgba(0,0,0,0.2);
 }
 
+@media (max-width: 768px) {
+  .parallax-divider {
+    background-attachment: scroll;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .parallax-divider {
+    background-attachment: scroll;
+  }
+}
+
 /* ===========================
    SCHEDULE SECTION
    =========================== */
