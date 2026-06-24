@@ -217,6 +217,54 @@ function initRSVP(confetti: Confetti) {
   const step2 = document.getElementById('rsvp-step2')!;
   const thanks = document.getElementById('rsvp-thanks')!;
 
+  const fileInput = document.getElementById('gb-file') as HTMLInputElement;
+  const filePreview = document.getElementById('file-preview') as HTMLElement;
+  let base64Photo = '';
+  let photoMimeType = '';
+  let photoName = '';
+
+  if (fileInput && filePreview) {
+    fileInput.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      const file = target.files?.[0];
+      
+      if (file) {
+        if (file.size > 5 * 1024 * 1024) {
+           alert('Файл тым үлкен. 5МБ-қа дейінгі сурет таңдаңыз (Размер файла превышает 5МБ)');
+           fileInput.value = '';
+           return;
+        }
+
+        filePreview.innerHTML = '';
+        filePreview.classList.remove('hidden');
+        
+        const fileURL = URL.createObjectURL(file);
+        const img = document.createElement('img');
+        img.src = fileURL;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain';
+        img.style.background = '#000';
+        filePreview.appendChild(img);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+           const result = reader.result as string;
+           base64Photo = result.split(',')[1];
+           photoMimeType = file.type;
+           photoName = file.name;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        filePreview.classList.add('hidden');
+        filePreview.innerHTML = '';
+        base64Photo = '';
+        photoMimeType = '';
+        photoName = '';
+      }
+    });
+  }
+
   const submitBtn = document.getElementById('rsvp-submit') as HTMLButtonElement;
   if (submitBtn) {
     submitBtn.addEventListener('click', () => {
@@ -242,6 +290,11 @@ function initRSVP(confetti: Confetti) {
       data.append('name', name);
       data.append('companions', companions);
       data.append('date', new Date().toLocaleString('ru-RU'));
+      if (base64Photo) {
+        data.append('photoBase64', base64Photo);
+        data.append('photoMimeType', photoMimeType);
+        data.append('photoName', photoName);
+      }
 
       fetch(SCRIPT_URL, {
         method: 'POST',

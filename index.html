@@ -25,13 +25,13 @@
   <div id="main-content">
     <!-- FULLSCREEN PHOTO HERO -->
     <section class="fullscreen-hero">
-      <div class="fullscreen-bg" style="background-image: url('/assets/bride.jpeg');"></div>
-      <div class="fullscreen-overlay"></div>
+      <div class="fullscreen-bg" style="background-image: url('/assets/bride.png');"></div>
+      <!-- <div class="fullscreen-overlay"></div> removed darkening per user request -->
       <div class="fullscreen-content anim-on-scroll">
         <h3 class="hero-role">Qyz Uzaty</h3>
         <h2 class="hero-name">Жансая</h2>
       </div>
-      <div class="scroll-indicator" style="color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+      <div class="scroll-indicator" style="color: #fff; text-shadow: 0 2px 4px rgba(158, 27, 27, 0.5);">
         <span class="scroll-text" data-kk="Төмен жылжытыңыз" data-ru="Листайте вниз">Төмен жылжытыңыз</span>
         <span class="scroll-arrow">↓</span>
       </div>
@@ -113,6 +113,18 @@
           <p class="info-big">20 Тамыз, 2026</p>
           <p class="info-small" data-kk="Бейсенбі, сағат 17:00" data-ru="Четверг, 17:00">Бейсенбі, сағат 17:00</p>
         </div>
+        
+        <div class="info-card anim-on-scroll" style="transition-delay: 0.1s;">
+          <div class="info-icon">👗</div>
+          <h3 class="info-title" data-kk="Дресс-код" data-ru="Дресс-код">Дресс-код</h3>
+          <div style="display: flex; justify-content: center; gap: 15px; margin: 15px 0;">
+            <div style="width: 50px; height: 50px; background-color: #1a5640; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+            <div style="width: 50px; height: 50px; background-color: #093315; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+          </div>
+          <p class="info-big" style="font-size: 1.2rem; margin-bottom: 10px;" data-kk="Малахит және қою жасыл" data-ru="Малахитовый и темно-зеленый">Малахит және қою жасыл</p>
+          <p class="info-small" style="line-height: 1.5;" data-kk="Толық образ болуы міндетті емес, киімнің бір элементі болса да жеткілікті." data-ru="Не обязательно полностью в этих цветах, достаточно добавить элемент одежды в образ.">Толық образ болуы міндетті емес, киімнің бір элементі болса да жеткілікті.</p>
+        </div>
+
         <div class="info-card map-card anim-on-scroll" style="transition-delay: 0.2s;">
           <div class="info-icon">📍</div>
           <h3 class="info-title" data-kk="Мекенжай" data-ru="Место проведения">Мекенжай</h3>
@@ -150,6 +162,14 @@
             <div class="form-group">
               <label class="rsvp-label">Сіз кіммен келесіз?</label>
               <input type="text" class="rsvp-input" id="guest-companions" placeholder="...">
+            </div>
+            <div class="file-upload-wrapper" style="margin-top: 10px; margin-bottom: 20px;">
+              <input type="file" id="gb-file" accept="image/*" style="display: none;">
+              <label for="gb-file" class="rsvp-btn file-upload-btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--cream); color: var(--gold-dk); border: 1px dashed var(--gold); cursor: pointer; box-shadow: none;">
+                <span class="upload-icon">📷</span>
+                <span>Сурет қосу / Прикрепить фото</span>
+              </label>
+              <div id="file-preview" class="file-preview hidden" style="margin-top: 15px; border-radius: 8px; overflow: hidden; max-height: 200px; border: 1px solid var(--border);"></div>
             </div>
             <button class="rsvp-btn rsvp-submit" id="rsvp-submit">Жіберу</button>
           </div>
